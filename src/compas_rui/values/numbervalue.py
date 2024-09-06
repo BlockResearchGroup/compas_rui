@@ -12,7 +12,7 @@ class NumberValue(Value):
                 raise ValueError("Value must be less than {}".format(self.max))
 
     def check(self, value):
-        super(FloatValue, self).check(value)
+        super().check(value)
         self._check_bounds(value)
 
     @property
