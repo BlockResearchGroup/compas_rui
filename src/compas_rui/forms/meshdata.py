@@ -38,6 +38,9 @@ class MeshDataForm(Eto.Forms.Dialog[bool]):
         excluded_edge_attr=None,
         excluded_face_attr=None,
     ):
+
+        super().__init__()
+
         self.mesh = mesh
         self.excluded_vertex_attr = excluded_vertex_attr
         self.excluded_edge_attr = excluded_edge_attr
@@ -117,7 +120,7 @@ class MeshDataForm(Eto.Forms.Dialog[bool]):
         return self.ShowModal(Rhino.UI.RhinoEtoApp.MainWindow)
 
 
-class Page(object):
+class Page:
     """Wrapper for Eto tab pages.
 
     Parameters

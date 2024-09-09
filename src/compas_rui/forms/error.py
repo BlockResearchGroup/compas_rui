@@ -68,6 +68,9 @@ Add any other context about the problem here.
 
 class ErrorForm(Eto.Forms.Dialog[bool]):
     def __init__(self, error="Unknown", title="Error", width=800, height=500):
+
+        super().__init__()
+
         self.Title = title
         self.Padding = Eto.Drawing.Padding(0)
         self.Resizable = True
@@ -89,7 +92,8 @@ class ErrorForm(Eto.Forms.Dialog[bool]):
 
     @property
     def ok(self):
-        self.DefaultButton = Eto.Forms.Button(Text="OK")
+        self.DefaultButton = Eto.Forms.Button()
+        self.DefaultButton.Text = "OK"
         self.DefaultButton.Click += self.on_ok
         return self.DefaultButton
 

@@ -39,6 +39,9 @@ class NamedValuesForm(Eto.Forms.Dialog[bool]):
         height=500,  # type: int
     ):
         # type: (...) -> None
+
+        super().__init__()
+
         def on_cell_formatting(sender, e):
             try:
                 if not e.Column.Editable:
@@ -58,7 +61,6 @@ class NamedValuesForm(Eto.Forms.Dialog[bool]):
 
         self.table = table = Eto.Forms.GridView()
         table.ShowHeader = True
-        table.DataStore = [list(row) for row in zip(self.names, self.values)]
 
         column = Eto.Forms.GridColumn()
         column.HeaderText = "Name"
@@ -72,7 +74,12 @@ class NamedValuesForm(Eto.Forms.Dialog[bool]):
         column.DataCell = Eto.Forms.TextBoxCell(1)
         table.Columns.Add(column)
 
-        table.CellFormatting += on_cell_formatting
+        collection = []
+        for name, value in zip(self.names, self.values):
+            item = Eto.Forms.GridItem()
+            item.Values = (name, value)
+            collection.append(item)
+        table.DataStore = collection
 
         layout = Eto.Forms.DynamicLayout()
         layout.BeginVertical(Eto.Drawing.Padding(0, 0, 0, 0), Eto.Drawing.Size(0, 0), True, True)
@@ -86,21 +93,23 @@ class NamedValuesForm(Eto.Forms.Dialog[bool]):
 
     @property
     def ok(self):
-        self.DefaultButton = Eto.Forms.Button(Text="OK")
+        self.DefaultButton = Eto.Forms.Button()
+        self.DefaultButton.Text = "OK"
         self.DefaultButton.Click += self.on_ok
         return self.DefaultButton
 
     @property
     def cancel(self):
-        self.AbortButton = Eto.Forms.Button(Text="Cancel")
+        self.AbortButton = Eto.Forms.Button()
+        self.AbortButton.Text = "Cancel"
         self.AbortButton.Click += self.on_cancel
         return self.AbortButton
 
     def on_ok(self, sender, event):
         try:
             for row in self.table.DataStore:
-                name = row[0]
-                value = row[1]
+                name = row.GetValue(0)
+                value = row.GetValue(1)
                 if value != "-":
                     try:
                         value = ast.literal_eval(value)
@@ -117,3 +126,10 @@ class NamedValuesForm(Eto.Forms.Dialog[bool]):
 
     def show(self):
         return self.ShowModal(Rhino.UI.RhinoEtoApp.MainWindow)
+
+
+if __name__ == "__main__":
+
+    form = NamedValuesForm(names=["a", "b"], values=[1, 2])
+    if form.show():
+        print(form.attributes)

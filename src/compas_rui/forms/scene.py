@@ -14,6 +14,7 @@ from .settings import SettingsForm
 
 class ObjCell(Eto.Forms.CustomCell):
     def __init__(self, parent):
+        super().__init__()
         self.parent = parent
 
     def OnGetIdentifier(self, args):
@@ -22,23 +23,24 @@ class ObjCell(Eto.Forms.CustomCell):
 
 class ObjNameCell(ObjCell):
     def OnCreateCell(self, args):
+        def on_text_changed(sender, e):
+            obj.name = sender.Text
+
         obj = args.Item.GetValue(0)
         control = Eto.Forms.TextBox()
         control.Text = obj.name
         control.ShowBorder = False
-
-        def on_text_changed(sender, e):
-            obj.name = sender.Text
-
         control.TextChanged += on_text_changed
-
         return control
 
 
 class ObjTypeCell(ObjCell):
     def OnCreateCell(self, args):
         obj = args.Item.GetValue(0)
-        control = Eto.Forms.Label(Text=obj.item.__class__.__name__, TextAlignment=Eto.Forms.TextAlignment.Left)
+        control = Eto.Forms.Label(
+            Text=obj.item.__class__.__name__,
+            TextAlignment=Eto.Forms.TextAlignment.Left,
+        )
         return control
 
 
@@ -52,128 +54,119 @@ class VisibleCell(ObjCell):
         control = Eto.Forms.CheckBox()
         control.Checked = obj.visible
         control.CheckedChanged += on_click
-
         return control
 
 
 class SettingsCell(ObjCell):
     def OnCreateCell(self, args):
+        def on_click(sender, e):
+            form = SettingsForm(obj.settings)
+            if form.ShowModal(self.parent):
+                obj.settings.update(form.settings)
+                self.parent.scene.update()
+
         obj = args.Item.GetValue(0)
-
         if isinstance(obj.item, Mesh):
-
-            def on_click(sender, e):
-                form = SettingsForm(obj.settings)
-                if form.ShowModal(self.parent):
-                    # obj.settings.update(form.settings)
-                    self.parent.scene.update()
-
-            control = Eto.Forms.Button(Text="Settings")
+            control = Eto.Forms.Button()
+            control.Text = "Settings"
             control.BackgroundColor = Eto.Drawing.Colors.Gray
             control.Click += on_click
-
             return control
 
 
 class ItemCell(ObjCell):
     def OnCreateCell(self, args):
+        def on_click(sender, e):
+            form = MeshDataForm(obj.item)
+            if form.ShowModal(self.parent):
+                self.parent.scene.update()
+
         obj = args.Item.GetValue(0)
-
         if isinstance(obj.item, Mesh):
-
-            def on_click(sender, e):
-                form = MeshDataForm(obj.item)
-                if form.ShowModal(self.parent):
-                    self.parent.scene.update()
-
-            control = Eto.Forms.Button(Text="Data")
+            control = Eto.Forms.Button()
+            control.Text = "Data"
             control.BackgroundColor = Eto.Drawing.Colors.Gray
             control.Click += on_click
-
             return control
 
 
 # class DefaultAttributesCell(ObjCell):
 #     def OnCreateCell(self, args):
+#         def on_click(sender, e):
+#             form = DefaultAttributesForm(obj.item)
+#             if form.ShowModal(self.parent):
+#                 self.parent.scene.update()
+
 #         obj = args.Item.GetValue(0)
 #         if isinstance(obj.item, Mesh):
-
-#             def on_click(sender, e):
-#                 form = DefaultAttributesForm(obj.item)
-#                 if form.ShowModal(self.parent):
-#                     self.parent.scene.update()
-
-#             control = Eto.Forms.Button(Text="Default Attributes")
+#             control = Eto.Forms.Button()
+#             control.Text = "Default Attributes"
 #             control.BackgroundColor = Eto.Drawing.Colors.Gray
 #             control.Click += on_click
-
 #             return control
 
 
 class ExportCell(ObjCell):
     def OnCreateCell(self, args):
+        def on_click(sender, e):
+            path = FileForm.save(basename=obj.name + ".json")
+            if not path:
+                return
+            json_dump(obj.item, path)
+
         obj = args.Item.GetValue(0)
-
         if isinstance(obj.item, Data):
-
-            def on_click(sender, e):
-                path = FileForm.save(basename=obj.name + ".json")
-                if not path:
-                    return
-                json_dump(obj.item, path)
-
-            control = Eto.Forms.Button(Text="Export")
+            control = Eto.Forms.Button()
+            control.Text = "Export"
             control.BackgroundColor = Eto.Drawing.Colors.Gray
             control.Click += on_click
-
             return control
 
 
 class RemoveCell(ObjCell):
     def OnCreateCell(self, args):
-        obj = args.Item.GetValue(0)
-
         def on_click(sender, e):
-            if (
-                Eto.Forms.MessageBox.Show(
-                    "Are you sure you want to remove this object?",
-                    "Confirm",
-                    Eto.Forms.MessageBoxButtons.YesNo,
-                )
-                == Eto.Forms.DialogResult.Yes
-            ):
+            result = Eto.Forms.MessageBox.Show(
+                "Are you sure you want to remove this object?",
+                "Confirm",
+                Eto.Forms.MessageBoxButtons.YesNo,
+            )
+            if result == Eto.Forms.DialogResult.Yes:
                 self.parent.scene.remove(obj)
                 self.parent.scene.update()
                 self.parent.map_objects()
 
-        control = Eto.Forms.Button(Text="Remove")
+        obj = args.Item.GetValue(0)
+        control = Eto.Forms.Button()
+        control.Text = "Remove"
         control.BackgroundColor = Eto.Drawing.Colors.Gray
         control.Click += on_click
+        return control
+
+
+class ActiveCell(ObjCell):
+    def OnCreateCell(self, args):
+        def on_click(sender, e):
+            self.parent.scene.active_object = obj
+            for _obj, _control in self.parent.active_controls:
+                if _obj != obj:
+                    _control.Checked = self.parent.scene.active_object == _obj
+            # print("active object:", self.parent.scene.active_object)
+
+        obj = args.Item.GetValue(0)
+        control = Eto.Forms.RadioButton()
+        control.Checked = obj.active
+        control.MouseDown += on_click
+        self.parent.active_controls.append((obj, control))
 
         return control
 
 
-# class ActiveCell(ObjCell):
-#     def OnCreateCell(self, args):
-#         def on_click(sender, e):
-#             self.parent.scene.active_object = obj
-#             for _obj, _control in self.parent.active_controls:
-#                 if _obj != obj:
-#                     _control.Checked = self.parent.scene.active_object == _obj
-
-#             # print("active object:", self.parent.scene.active_object)
-
-#         obj = args.Item.GetValue(0)
-#         control = Eto.Forms.RadioButton()
-#         control.Checked = obj.active
-#         control.MouseDown += on_click
-#         self.parent.active_controls.append((obj, control))
-
-#         return control
-
-
 class SceneObjectsForm(Eto.Forms.Dialog[bool]):
     def __init__(self, scene, title="Scene Objects", width=800, height=500):
+
+        super().__init__()
+
         self.Title = title
         self.Padding = Eto.Drawing.Padding(0)
         self.Resizable = True
@@ -232,11 +225,11 @@ class SceneObjectsForm(Eto.Forms.Dialog[bool]):
         column.DataCell = ExportCell(self)
         self.table.Columns.Add(column)
 
-        column = Eto.Forms.GridColumn()
-        column.HeaderText = ""
-        column.Editable = False
-        column.DataCell = RemoveCell(self)
-        self.table.Columns.Add(column)
+        # column = Eto.Forms.GridColumn()
+        # column.HeaderText = ""
+        # column.Editable = False
+        # column.DataCell = RemoveCell(self)
+        # self.table.Columns.Add(column)
 
         self.map_objects()
 
@@ -249,18 +242,17 @@ class SceneObjectsForm(Eto.Forms.Dialog[bool]):
         self.active_controls = []
 
     def map_objects(self):
-        collection = Eto.Forms.TreeGridItemCollection()
-
         def add_items(parent, objects):
             for obj in objects:
-                item = Eto.Forms.TreeGridItem(Values=(obj,))
+                item = Eto.Forms.TreeGridItem()
+                item.Values = (obj,)
                 if obj.children:
                     add_items(item.Children, obj.children)
                 parent.Add(item)
 
+        collection = Eto.Forms.TreeGridItemCollection()
         root_objects = [obj for obj in self.scene.objects if obj.parent is None]
         add_items(collection, root_objects)
-
         self.table.DataStore = collection
 
     def show(self):

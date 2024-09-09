@@ -46,13 +46,15 @@ class CustomCell(Eto.Forms.CustomCell):
             elif valueobj.value_type is float:
                 control = Eto.Forms.NumericUpDown()
                 control.Value = value
-                precision = str(value)
-                d = decimal.Decimal(precision).as_tuple()
+                d = decimal.Decimal(str(value)).as_tuple()
                 control.DecimalPlaces = -d.exponent
-                control.Increment = 10**d.exponent
+                control.MaximumDecimalPlaces = 3
+                control.MinValue = 0
+                control.Increment = 1e-3
 
                 def on_value_changed(sender, e):
-                    item.SetValue(1, float(control.Value))
+                    value = float(control.Value)
+                    item.SetValue(1, value)
 
                 control.ValueChanged += on_value_changed
 
@@ -140,7 +142,6 @@ class SettingsForm(Eto.Forms.Dialog[bool]):
     def map_tree(self, settings):
         """Create the items for the form."""
         table = Eto.Forms.TreeGridView()
-        treecollection = Eto.Forms.TreeGridItemCollection()
         table.ShowHeader = True
 
         column = Eto.Forms.GridColumn()
@@ -173,8 +174,8 @@ class SettingsForm(Eto.Forms.Dialog[bool]):
                     add_items(item.Children, value)
                 parent.Add(item)
 
+        treecollection = Eto.Forms.TreeGridItemCollection()
         add_items(treecollection, settings.grouped_items)
-
         table.DataStore = treecollection
         return table
 

@@ -7,6 +7,9 @@ import System  # type: ignore
 
 class SplashForm(Eto.Forms.Dialog[bool]):
     def __init__(self, title, url, width=800, height=450):
+
+        super().__init__()
+
         self.Title = title
         self.Padding = Eto.Drawing.Padding(0)
         self.Resizable = False
