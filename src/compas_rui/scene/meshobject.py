@@ -37,7 +37,7 @@ class RUIMeshObject(RhinoMeshObject):
         elif option == "Degree":
             D = rs.GetInteger(message="Vertex Degree", number=2, minimum=1)
             D = D or 0
-            vertices = self.mesh.vertices_where(vertex_degree=D)
+            vertices = list(self.mesh.vertices_where(vertex_degree=D))
 
         elif option == "EdgeLoop":
             self.show_edges = True
@@ -48,7 +48,7 @@ class RUIMeshObject(RhinoMeshObject):
             rs.Redraw()
 
             guids = compas_rhino.objects.select_lines(message="Select Edges")
-            edges = [self._guid_edge.get(guid) for guid in guids] if guids else []
+            edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
             temp = []
             for edge in edges:
                 for u, v in self.mesh.edge_loop(edge):
@@ -64,7 +64,7 @@ class RUIMeshObject(RhinoMeshObject):
 
         elif option == "Manual":
             guids = compas_rhino.objects.select_points(message="Select Vertices")
-            vertices = [self._guid_vertex.get(guid) for guid in guids] if guids else []
+            vertices = [self._guid_vertex[guid] for guid in guids if guid in self._guid_vertex] if guids else []
 
         return vertices
 
@@ -91,7 +91,7 @@ class RUIMeshObject(RhinoMeshObject):
 
         elif option == "Manual":
             guids = compas_rhino.objects.select_lines(message="Select Edges")
-            edges = [self._guid_edge.get(guid) for guid in guids] if guids else []
+            edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
 
         return edges
 
@@ -138,6 +138,9 @@ class RUIMeshObject(RhinoMeshObject):
     def update_vertex_attributes(self, vertices, names=None):
         # type: (list[int], list[str] | None) -> bool
 
+        if not vertices:
+            return False
+
         names = names or sorted(self.mesh.default_vertex_attributes.keys())
         names = sorted([name for name in names if not name.startswith("_")])
 
@@ -148,16 +151,22 @@ class RUIMeshObject(RhinoMeshObject):
                     if values[i] != self.mesh.vertex_attribute(vertex, name):
                         values[i] = "-"
                         break
-        values = map(str, values)
+        values = list(map(str, values))
 
         form = NamedValuesForm(names=names, values=values)
         if form.show():
-            self.mesh.attributes.update(form.attributes)
+            for name, value in form.attributes.items():
+                if value == "-":
+                    continue
+                self.mesh.vertices_attribute(name=name, value=value, keys=vertices)
             return True
         return False
 
     def update_face_attributes(self, faces, names=None):
         # type: (list[int], list[str] | None) -> bool
+
+        if not faces:
+            return False
 
         names = names or sorted(self.mesh.default_face_attributes.keys())
         names = sorted([name for name in names if not name.startswith("_")])
@@ -169,16 +178,22 @@ class RUIMeshObject(RhinoMeshObject):
                     if values[i] != self.mesh.face_attribute(face, name):
                         values[i] = "-"
                         break
-        values = map(str, values)
+        values = list(map(str, values))
 
         form = NamedValuesForm(names=names, values=values)
         if form.show():
-            self.mesh.attributes.update(form.attributes)
+            for name, value in form.attributes.items():
+                if value == "-":
+                    continue
+                self.mesh.faces_attribute(name=name, value=value, keys=faces)
             return True
         return False
 
     def update_edge_attributes(self, edges, names=None):
         # type: (list[tuple[int, int]], list[str] | None) -> bool
+
+        if not edges:
+            return False
 
         names = names or sorted(self.mesh.default_edge_attributes.keys())
         names = sorted([name for name in names if not name.startswith("_")])
@@ -190,11 +205,14 @@ class RUIMeshObject(RhinoMeshObject):
                     if values[i] != self.mesh.edge_attribute(edge, name):
                         values[i] = "-"
                         break
-        values = map(str, values)
+        values = list(map(str, values))
 
         form = NamedValuesForm(names=names, values=values)
         if form.show():
-            self.mesh.attributes.update(form.attributes)
+            for name, value in form.attributes.items():
+                if value == "-":
+                    continue
+                self.mesh.edges_attribute(name=name, value=value, keys=edges)
             return True
         return False
 
