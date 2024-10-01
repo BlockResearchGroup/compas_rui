@@ -9,7 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* `compas_rui.scene.RUIMeshObject`.
+* `compas_rui.values.BoolValue`.
+* `compas_rui.values.ColorValue`.
+* `compas_rui.values.DictValue`.
+* `compas_rui.values.FloatValue`.
+* `compas_rui.values.IntValue`.
+* `compas_rui.values.ListValue`.
+* `compas_rui.values.StrValue`.
+
 ### Changed
 
 ### Removed
-
