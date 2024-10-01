@@ -172,33 +172,18 @@
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="examples.html">
-                        Examples
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="api.html">
                         API Reference
                       </a>
                     </li>
                 
-            <div class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    More
-                </button>
-                <div class="dropdown-menu">
-                    
+
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="license.html">
                         License
                       </a>
                     </li>
                 
-                </div>
-            </div>
-            
   </ul> -->
 </nav></div>
       
@@ -302,6 +287,10 @@ document.write(`
   
 
   
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
 </div>
 
     </nav>
@@ -349,33 +338,18 @@ document.write(`
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="examples.html">
-                        Examples
-                      </a>
-                    </li>
-                
-
-                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="api.html">
                         API Reference
                       </a>
                     </li>
                 
-            <div class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    More
-                </button>
-                <div class="dropdown-menu">
-                    
+
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="license.html">
                         License
                       </a>
                     </li>
                 
-                </div>
-            </div>
-            
   </ul> -->
 </nav></div>
         
@@ -462,9 +436,13 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/compas_rui.html">compas_rui</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api/compas_rui.html">compas_rui</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/compas_rui.forms.html">forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/compas_rui.scene.html">scene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/compas_rui.values.html">values</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -530,6 +508,44 @@ document.write(`
                   
   <section id="installation">
 <h1>Installation</h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">compas_rui</span></code> is meant to be used in Rhino 8, with the new CPython runtime.
+Outside of Rhino(8), or in combination with IronPython in Rhino 8, it will simply not work.</p>
+</div>
+<section id="stable">
+<h2>Stable</h2>
+<p>To use <code class="docutils literal notranslate"><span class="pre">compas_rui</span></code> in your Rhino CPython scripts,
+use the requirements notation of the Rhino ScriptEditor,
+by adding a comment to the top of your script files.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># r: compas_rui</span>
+</pre></div>
+</div>
+<p>Alternatively, you can install the package manually from PyPI,
+using the <cite>python3.9</cite> executable that ships with Rhino.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/path/to/rhino/python3.9<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>compas_rui
+</pre></div>
+</div>
+</section>
+<section id="latest">
+<h2>Latest</h2>
+<p>The latest version can be installed from local source.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/blockresearchgroup/compas_rui.git
+<span class="nb">cd</span><span class="w"> </span>compas_rui
+/path/to/rhino/python3.9<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="development">
+<h2>Development</h2>
+<p>To install <cite>compas_rui</cite> for development, install from local source with the “dev” requirements.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/blockresearchgroup/compas_rui.git
+<span class="nb">cd</span><span class="w"> </span>compas_rui
+/path/to/rhino/python3.9<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+/path/to/rhino/python3.9<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -544,6 +560,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stable">Stable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latest">Latest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development">Development</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
