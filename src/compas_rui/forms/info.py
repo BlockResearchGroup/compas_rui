@@ -6,7 +6,6 @@ import Rhino.UI  # type: ignore
 
 class InfoForm(Eto.Forms.Dialog[bool]):
     def __init__(self, text, title="Info", width=800, height=500):
-
         super().__init__()
 
         self.Title = title

@@ -38,7 +38,6 @@ class MeshDataForm(Eto.Forms.Dialog[bool]):
         excluded_edge_attr=None,
         excluded_face_attr=None,
     ):
-
         super().__init__()
 
         self.mesh = mesh

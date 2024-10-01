@@ -164,7 +164,6 @@ class ActiveCell(ObjCell):
 
 class SceneObjectsForm(Eto.Forms.Dialog[bool]):
     def __init__(self, scene, title="Scene Objects", width=800, height=500):
-
         super().__init__()
 
         self.Title = title
