@@ -103,17 +103,17 @@ class RUIMeshObject(RhinoMeshObject):
     # =============================================================================
     # =============================================================================
 
-    def draw(self):
-        return super().draw()
+    # def draw(self):
+    #     return super().draw()
 
-    def draw_vertices(self):
-        return super().draw_vertices()
+    # def draw_vertices(self):
+    #     return super().draw_vertices()
 
-    def draw_edges(self):
-        return super().draw_edges()
+    # def draw_edges(self):
+    #     return super().draw_edges()
 
-    def draw_faces(self):
-        return super().draw_faces()
+    # def draw_faces(self):
+    #     return super().draw_faces()
 
     # =============================================================================
     # =============================================================================

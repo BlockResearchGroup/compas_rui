@@ -1,10 +1,15 @@
 ********************************************************************************
-Examples
+scene
 ********************************************************************************
 
-.. toctree::
-   :maxdepth: 1
-   :titlesonly:
-   :glob:
+.. currentmodule:: compas_rui.scene
 
-   examples/*
+
+Classes
+=======
+
+.. autosummary::
+    :toctree: generated/
+    :nosignatures:
+
+    RUIMeshObject

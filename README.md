@@ -30,4 +30,3 @@ please check out the online documentation here: [COMPAS Rhino UI docs](https://b
 ## Issue Tracker
 
 If you find a bug or if you have a problem with running the code, please file an issue on the [Issue Tracker](https://github.com/blockresearchgroup/compas_rui/issues).
-
