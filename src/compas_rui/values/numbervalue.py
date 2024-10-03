@@ -3,46 +3,46 @@ from .value import Value
 
 class NumberValue(Value):
     def _check_bounds(self, value):
-        if self.min is not None:
-            if value < self.min:
-                raise ValueError("Value must be greater than {}".format(self.min))
+        if self.minval is not None:
+            if value < self.minval:
+                raise ValueError("Value must be greater than {}".format(self.minval))
 
-        if self.max is not None:
-            if value > self.max:
-                raise ValueError("Value must be less than {}".format(self.max))
+        if self.maxval is not None:
+            if value > self.maxval:
+                raise ValueError("Value must be less than {}".format(self.maxval))
 
     def check(self, value):
         super().check(value)
         self._check_bounds(value)
 
     @property
-    def min(self):
-        return self._min
+    def minval(self):
+        return self._minval
 
-    @min.setter
-    def min(self, value):
+    @minval.setter
+    def minval(self, value):
         self._check_type(value)
-        self._min = value
+        self._minval = value
 
     @property
-    def max(self):
-        return self._max
+    def maxval(self):
+        return self._maxval
 
-    @max.setter
-    def max(self, value):
+    @maxval.setter
+    def maxval(self, value):
         self._check_type(value)
-        self._max = value
+        self._maxval = value
 
 
 class FloatValue(NumberValue):
-    def __init__(self, value=0.0, min=None, max=None, options=None):
+    def __init__(self, value=0.0, minval=None, maxval=None, options=None):
         super().__init__(value, float, options=options)
-        if min is not None:
-            self._check_type(min)
-        if max is not None:
-            self._check_type(max)
-        self._min = min
-        self._max = max
+        if minval is not None:
+            self._check_type(minval)
+        if maxval is not None:
+            self._check_type(maxval)
+        self._minval = minval
+        self._maxval = maxval
         self._check_bounds(value)
 
     @property
@@ -51,27 +51,27 @@ class FloatValue(NumberValue):
             "value": self.value,
             "value_type": "float",
             "options": self.options,
-            "min": self.min,
-            "max": self.max,
+            "minval": self.minval,
+            "maxval": self.maxval,
         }
 
     @data.setter
     def data(self, data):
         self._value = data["value"]
         self._options = data["options"]
-        self._min = data["min"]
-        self._max = data["max"]
+        self._minval = data["minval"]
+        self._maxval = data["maxval"]
 
 
 class IntValue(NumberValue):
-    def __init__(self, value=0, min=None, max=None, options=None):
+    def __init__(self, value=0, minval=None, maxval=None, options=None):
         super().__init__(value, int, options=options)
-        if min is not None:
-            self._check_type(min)
-        if max is not None:
-            self._check_type(max)
-        self._min = min
-        self._max = max
+        if minval is not None:
+            self._check_type(minval)
+        if maxval is not None:
+            self._check_type(maxval)
+        self._minval = minval
+        self._maxval = maxval
         self._check_bounds(value)
 
     @property
@@ -80,13 +80,13 @@ class IntValue(NumberValue):
             "value": self.value,
             "value_type": "int",
             "options": self.options,
-            "min": self.min,
-            "max": self.max,
+            "minval": self.minval,
+            "maxval": self.maxval,
         }
 
     @data.setter
     def data(self, data):
         self._value = data["value"]
         self._options = data["options"]
-        self._min = data["min"]
-        self._max = data["max"]
+        self._minval = data["minval"]
+        self._maxval = data["maxval"]

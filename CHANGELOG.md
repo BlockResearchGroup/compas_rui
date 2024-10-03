@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+* Changed `compas_rui.values.FloatValue.min` to `compas_rui.values.FloatValue.minval`.
+* Changed `compas_rui.values.FloatValue.max` to `compas_rui.values.FloatValue.maxval`.
+* Changed `compas_rui.values.IntValue.min` to `compas_rui.values.IntValue.minval`.
+* Changed `compas_rui.values.IntValue.max` to `compas_rui.values.IntValue.maxval`.
+* Fixed `compas_rui.forms.SplashForm.WindowStyle`.
+
 ### Removed
 
 
