@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Changed `compas_rui.values.IntValue.min` to `compas_rui.values.IntValue.minval`.
 * Changed `compas_rui.values.IntValue.max` to `compas_rui.values.IntValue.maxval`.
 * Fixed `compas_rui.forms.SplashForm.WindowStyle`.
+* Changed `compas_rui.scene.RUIMeshObject.select_vertices` to require list of selectable vertices.
+* Changed `compas_rui.scene.RUIMeshObject.select_edges` to require list of selectable edges.
+* Changed `compas_rui.forms.NamedValuesForm` to have expanded "Name" column.
 
 ### Removed
 

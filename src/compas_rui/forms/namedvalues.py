@@ -65,6 +65,7 @@ class NamedValuesForm(Eto.Forms.Dialog[bool]):
         column = Eto.Forms.GridColumn()
         column.HeaderText = "Name"
         column.Editable = False
+        column.Expand = True
         column.DataCell = Eto.Forms.TextBoxCell(0)
         table.Columns.Add(column)
 

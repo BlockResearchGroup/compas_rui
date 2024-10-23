@@ -21,7 +21,7 @@ class RUIMeshObject(RhinoMeshObject):
     # =============================================================================
     # =============================================================================
 
-    def select_vertices(self):
+    def select_vertices(self, selectable: list[int]):
         option = rs.GetString(message="Select Vertices", strings=["All", "Boundary", "Degree", "EdgeLoop", "Manual"])
         if not option:
             return
@@ -40,6 +40,8 @@ class RUIMeshObject(RhinoMeshObject):
             vertices = list(self.mesh.vertices_where(vertex_degree=D))
 
         elif option == "EdgeLoop":
+            show_edges = self.show_edges
+
             self.show_edges = True
             rs.EnableRedraw(False)
             self.clear_edges()
@@ -56,32 +58,48 @@ class RUIMeshObject(RhinoMeshObject):
                     temp.append(v)
             vertices = list(set(temp))
 
-            self.show_edges = False
+            self.show_edges = show_edges
             rs.EnableRedraw(False)
             self.clear_edges()
+            self.draw_edges()
             rs.EnableRedraw(True)
             rs.Redraw()
 
         elif option == "Manual":
+            self.show_vertices = selectable
+            rs.EnableRedraw(False)
+            self.clear_vertices()
+            self.draw_vertices()
+            rs.EnableRedraw(True)
+            rs.Redraw()
+
             guids = compas_rhino.objects.select_points(message="Select Vertices")
             vertices = [self._guid_vertex[guid] for guid in guids if guid in self._guid_vertex] if guids else []
 
-        return vertices
+        return list(set(vertices) & set(selectable))
 
-    def select_edges(self):
+    def select_edges(self, selectable: list[tuple[int, int]]):
         option = rs.GetString(message="Select Edges", strings=["All", "Boundary", "EdgeLoop", "Manual"])
         if not option:
             return
 
         edges: list[tuple[int, int]]
+        self.show_edges = selectable
 
         if option == "All":
             edges = list(self.mesh.edges())
 
         elif option == "Boundary":
             edges = list(set(flatten(self.mesh.edges_on_boundaries())))
+            edges = [(u, v) if self.mesh.has_edge((u, v)) else (v, u) for u, v in edges]
 
         elif option == "EdgeLoop":
+            rs.EnableRedraw(False)
+            self.clear_edges()
+            self.draw_edges()
+            rs.EnableRedraw(True)
+            rs.Redraw()
+
             guids = compas_rhino.objects.select_lines(message="Select Edges")
             edges = []
             for guid in guids:
@@ -90,10 +108,16 @@ class RUIMeshObject(RhinoMeshObject):
                     edges.append(edge)
 
         elif option == "Manual":
+            rs.EnableRedraw(False)
+            self.clear_edges()
+            self.draw_edges()
+            rs.EnableRedraw(True)
+            rs.Redraw()
+
             guids = compas_rhino.objects.select_lines(message="Select Edges")
             edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
 
-        return edges
+        return list(set(edges) & set(selectable))
 
     # =============================================================================
     # =============================================================================
@@ -102,18 +126,6 @@ class RUIMeshObject(RhinoMeshObject):
     # =============================================================================
     # =============================================================================
     # =============================================================================
-
-    # def draw(self):
-    #     return super().draw()
-
-    # def draw_vertices(self):
-    #     return super().draw_vertices()
-
-    # def draw_edges(self):
-    #     return super().draw_edges()
-
-    # def draw_faces(self):
-    #     return super().draw_faces()
 
     # =============================================================================
     # =============================================================================
