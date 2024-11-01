@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* Added `message` param to `compas_rui.scene.RhinoMeshObject.select_vertices`.
+* Added `message` param to `compas_rui.scene.RhinoMeshObject.select_edges`.
+
 ### Changed
 
 ### Removed

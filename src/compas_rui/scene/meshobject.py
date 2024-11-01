@@ -21,8 +21,8 @@ class RUIMeshObject(RhinoMeshObject):
     # =============================================================================
     # =============================================================================
 
-    def select_vertices(self, selectable: list[int]):
-        option = rs.GetString(message="Select Vertices", strings=["All", "Boundary", "Degree", "EdgeLoop", "Manual"])
+    def select_vertices(self, selectable: list[int], message="Select Vertices"):
+        option = rs.GetString(message=message, strings=["All", "Boundary", "Degree", "EdgeLoop", "Manual"])
         if not option:
             return
 
@@ -41,12 +41,9 @@ class RUIMeshObject(RhinoMeshObject):
 
         elif option == "EdgeLoop":
             show_edges = self.show_edges
-
             self.show_edges = True
-            rs.EnableRedraw(False)
             self.clear_edges()
             self.draw_edges()
-            rs.EnableRedraw(True)
             rs.Redraw()
 
             guids = compas_rhino.objects.select_lines(message="Select Edges")
@@ -59,18 +56,14 @@ class RUIMeshObject(RhinoMeshObject):
             vertices = list(set(temp))
 
             self.show_edges = show_edges
-            rs.EnableRedraw(False)
             self.clear_edges()
             self.draw_edges()
-            rs.EnableRedraw(True)
             rs.Redraw()
 
         elif option == "Manual":
             self.show_vertices = selectable
-            rs.EnableRedraw(False)
             self.clear_vertices()
             self.draw_vertices()
-            rs.EnableRedraw(True)
             rs.Redraw()
 
             guids = compas_rhino.objects.select_points(message="Select Vertices")
@@ -78,8 +71,8 @@ class RUIMeshObject(RhinoMeshObject):
 
         return list(set(vertices) & set(selectable))
 
-    def select_edges(self, selectable: list[tuple[int, int]]):
-        option = rs.GetString(message="Select Edges", strings=["All", "Boundary", "EdgeLoop", "Manual"])
+    def select_edges(self, selectable: list[tuple[int, int]], message="Select Edges"):
+        option = rs.GetString(message=message, strings=["All", "Boundary", "EdgeLoop", "Manual"])
         if not option:
             return
 
@@ -94,10 +87,8 @@ class RUIMeshObject(RhinoMeshObject):
             edges = [(u, v) if self.mesh.has_edge((u, v)) else (v, u) for u, v in edges]
 
         elif option == "EdgeLoop":
-            rs.EnableRedraw(False)
             self.clear_edges()
             self.draw_edges()
-            rs.EnableRedraw(True)
             rs.Redraw()
 
             guids = compas_rhino.objects.select_lines(message="Select Edges")
@@ -108,10 +99,8 @@ class RUIMeshObject(RhinoMeshObject):
                     edges.append(edge)
 
         elif option == "Manual":
-            rs.EnableRedraw(False)
             self.clear_edges()
             self.draw_edges()
-            rs.EnableRedraw(True)
             rs.Redraw()
 
             guids = compas_rhino.objects.select_lines(message="Select Edges")
