@@ -1,3 +1,5 @@
+from typing import Optional
+
 import Rhino  # type: ignore
 import rhinoscriptsyntax as rs  # type: ignore
 
@@ -21,12 +23,11 @@ class RUIMeshObject(RhinoMeshObject):
     # =============================================================================
     # =============================================================================
 
-    def select_vertices(self, selectable: list[int], message="Select Vertices"):
-        option = rs.GetString(message=message, strings=["All", "Boundary", "Degree", "EdgeLoop", "Manual"])
+    def select_vertices(self, message="Select Vertices") -> list[int]:
+        options = ["All", "Boundary", "Degree", "EdgeLoop", "EdgeStrip", "Manual"]
+        option = rs.GetString(message=message, strings=options)
         if not option:
             return
-
-        vertices: list[int]
 
         if option == "All":
             vertices = list(self.mesh.vertices())
@@ -40,13 +41,7 @@ class RUIMeshObject(RhinoMeshObject):
             vertices = list(self.mesh.vertices_where(vertex_degree=D))
 
         elif option == "EdgeLoop":
-            show_edges = self.show_edges
-            self.show_edges = True
-            self.clear_edges()
-            self.draw_edges()
-            rs.Redraw()
-
-            guids = compas_rhino.objects.select_lines(message="Select Edges")
+            guids = compas_rhino.objects.select_lines(message="Select Loop Edges")
             edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
             temp = []
             for edge in edges:
@@ -55,58 +50,61 @@ class RUIMeshObject(RhinoMeshObject):
                     temp.append(v)
             vertices = list(set(temp))
 
-            self.show_edges = show_edges
-            self.clear_edges()
-            self.draw_edges()
-            rs.Redraw()
+        elif option == "EdgeStrip":
+            raise NotImplementedError
 
         elif option == "Manual":
-            self.show_vertices = selectable
-            self.clear_vertices()
-            self.draw_vertices()
-            rs.Redraw()
-
-            guids = compas_rhino.objects.select_points(message="Select Vertices")
+            guids = compas_rhino.objects.select_points(message="Select Manual Vertices")
             vertices = [self._guid_vertex[guid] for guid in guids if guid in self._guid_vertex] if guids else []
 
-        return list(set(vertices) & set(selectable))
+        vertex_guid = {vertex: guid for guid, vertex in self._guid_vertex.items()}
+        guids = [vertex_guid[vertex] for vertex in vertices]
 
-    def select_edges(self, selectable: list[tuple[int, int]], message="Select Edges"):
-        option = rs.GetString(message=message, strings=["All", "Boundary", "EdgeLoop", "Manual"])
+        rs.UnselectAllObjects()
+        rs.SelectObjects(guids)
+
+        return vertices
+
+    def select_edges(self, message="Select Edges") -> list[tuple[int, int]]:
+        options = ["All", "Boundary", "EdgeLoop", "EdgeStrip", "Manual"]
+        option = rs.GetString(message=message, strings=options)
         if not option:
             return
-
-        edges: list[tuple[int, int]]
-        self.show_edges = selectable
 
         if option == "All":
             edges = list(self.mesh.edges())
 
         elif option == "Boundary":
             edges = list(set(flatten(self.mesh.edges_on_boundaries())))
-            edges = [(u, v) if self.mesh.has_edge((u, v)) else (v, u) for u, v in edges]
 
         elif option == "EdgeLoop":
-            self.clear_edges()
-            self.draw_edges()
-            rs.Redraw()
-
-            guids = compas_rhino.objects.select_lines(message="Select Edges")
+            guids = compas_rhino.objects.select_lines(message="Select Loop Edges")
             edges = []
             for guid in guids:
                 edge = self._guid_edge[guid]
                 for edge in self.mesh.edge_loop(edge):
                     edges.append(edge)
 
-        elif option == "Manual":
-            self.clear_edges()
-            self.draw_edges()
-            rs.Redraw()
+        elif option == "EdgeStrip":
+            guids = compas_rhino.objects.select_lines(message="Select Strip Edges")
+            edges = []
+            for guid in guids:
+                edge = self._guid_edge[guid]
+                for edge in self.mesh.edge_strip(edge):
+                    edges.append(edge)
 
-            guids = compas_rhino.objects.select_lines(message="Select Edges")
+        elif option == "Manual":
+            guids = compas_rhino.objects.select_lines(message="Select Manual Edges")
             edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
 
-        return list(set(edges) & set(selectable))
+        edges = [(u, v) if self.mesh.has_edge((u, v)) else (v, u) for u, v in edges]
+        edge_guid = {edge: guid for guid, edge in self._guid_edge.items()}
+        guids = [edge_guid[edge] for edge in edges]
+
+        rs.UnselectAllObjects()
+        rs.SelectObjects(guids)
+
+        return edges
 
     # =============================================================================
     # =============================================================================
@@ -124,9 +122,7 @@ class RUIMeshObject(RhinoMeshObject):
     # =============================================================================
     # =============================================================================
 
-    def update_attributes(self):
-        # type: () -> bool
-
+    def update_attributes(self) -> bool:
         names = sorted(self.mesh.attributes.keys())
         values = [str(self.mesh.attributes[name]) for name in names]
 
@@ -136,9 +132,7 @@ class RUIMeshObject(RhinoMeshObject):
             return True
         return False
 
-    def update_vertex_attributes(self, vertices, names=None):
-        # type: (list[int], list[str] | None) -> bool
-
+    def update_vertex_attributes(self, vertices: list[int], names: Optional[list[str]] = None) -> bool:
         if not vertices:
             return False
 
@@ -163,9 +157,7 @@ class RUIMeshObject(RhinoMeshObject):
             return True
         return False
 
-    def update_face_attributes(self, faces, names=None):
-        # type: (list[int], list[str] | None) -> bool
-
+    def update_face_attributes(self, faces: list[int], names: Optional[list[str]] = None) -> bool:
         if not faces:
             return False
 
@@ -190,9 +182,7 @@ class RUIMeshObject(RhinoMeshObject):
             return True
         return False
 
-    def update_edge_attributes(self, edges, names=None):
-        # type: (list[tuple[int, int]], list[str] | None) -> bool
-
+    def update_edge_attributes(self, edges: list[tuple[int, int]], names: Optional[list[str]] = None) -> bool:
         if not edges:
             return False
 
@@ -225,9 +215,7 @@ class RUIMeshObject(RhinoMeshObject):
     # =============================================================================
     # =============================================================================
 
-    def move(self):
-        # type: () -> bool
-
+    def move(self) -> bool:
         color = Rhino.ApplicationSettings.AppearanceSettings.FeedbackColor
 
         vertex_p0 = {v: Rhino.Geometry.Point3d(*self.mesh.vertex_coordinates(v)) for v in self.mesh.vertices()}
@@ -273,9 +261,12 @@ class RUIMeshObject(RhinoMeshObject):
 
         return True
 
-    def move_vertex(self, vertex, constraint=None, allow_off=True):
-        # type: (int, Rhino.Geometry, bool) -> bool
-
+    def move_vertex(
+        self,
+        vertex: int,
+        constraint: Rhino.Geometry.GeometryBase = None,
+        allow_off: bool = True,
+    ) -> bool:
         def OnDynamicDraw(sender, e):
             for ep in nbrs:
                 sp = e.CurrentPoint
@@ -299,9 +290,7 @@ class RUIMeshObject(RhinoMeshObject):
         self.mesh.vertex_attributes(vertex, "xyz", list(gp.Point()))
         return True
 
-    def move_vertices(self, vertices):
-        # type: (list[int]) -> bool
-
+    def move_vertices(self, vertices: list[int]) -> bool:
         def OnDynamicDraw(sender, e):
             end = e.CurrentPoint
             vector = end - start
@@ -353,9 +342,7 @@ class RUIMeshObject(RhinoMeshObject):
             self.mesh.vertex_attributes(vertex, "xyz", point + vector)
         return True
 
-    def move_vertices_direction(self, vertices, direction):
-        # type: (list[int], str) -> bool
-
+    def move_vertices_direction(self, vertices: list[int], direction: str) -> bool:
         def OnDynamicDraw(sender, e):
             draw = e.Display.DrawDottedLine
             end = e.CurrentPoint

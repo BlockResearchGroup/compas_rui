@@ -6,9 +6,10 @@ from xml.dom import minidom
 from xml.etree import ElementTree as ET
 
 TPL_RUI = """<?xml version="1.0" encoding="utf-8"?>
-<RhinoUI major_ver="2"
+<RhinoUI major_ver="8"
          minor_ver="0"
          guid="{0}"
+         plug_in_guid="{0}"
          localize="False"
          default_language_id="1033">
     <extend_rhino_menus>
@@ -127,8 +128,8 @@ TPL_TOOLBAR = """
 
 TPL_TOOLBARGROUP = """
 <tool_bar_group guid="{0}"
-                dock_bar_guid32=""
-                dock_bar_guid64=""
+                dock_bar_guid32="{0}"
+                dock_bar_guid64="{0}"
                 active_tool_bar_group=""
                 single_file="{2[single_file]}"
                 hide_single_tab="{2[hide_single_tab]}"

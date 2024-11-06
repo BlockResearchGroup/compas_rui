@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* Added `compas_rui.rui.Rui`.
+
 ### Changed
 
-### Removed
+* Changed selection functions to require pre-drawing.
 
+### Removed
 
 ## [0.3.1] 2024-11-01
 
