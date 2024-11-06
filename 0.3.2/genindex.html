@@ -1,0 +1,960 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; COMPAS Rhino UI</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/css/compas.css?v=617b33e2" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script src="_static/documentation_options.js?v=c0b9450b"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/blockresearchgroup/compas_rui/gh-pages/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.3';
+        </script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/compas_icon_white.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/compas_icon_white.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+    <p class="title logo__title">COMPAS Rhino UI</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <!-- <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Introduction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="tutorial.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="license.html">
+                        License
+                      </a>
+                    </li>
+                
+  </ul> -->
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/blockresearchgroup/compas_rui" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="http://forum.compas-framework.org/" title="Discourse" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-discourse"></i></span>
+            <label class="sr-only">Discourse</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/compas_rui/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python"></i></span>
+            <label class="sr-only">PyPI</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <!-- <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Introduction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="tutorial.html">
+                        Tutorial
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="api.html">
+                        API Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="license.html">
+                        License
+                      </a>
+                    </li>
+                
+  </ul> -->
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button type="button" class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle" data-bs-toggle="dropdown">
+      0.3  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div class="version-switcher__menu dropdown-menu list-group-flush py-0">
+    <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/blockresearchgroup/compas_rui" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="http://forum.compas-framework.org/" title="Discourse" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-discourse"></i></span>
+            <label class="sr-only">Discourse</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/compas_rui/" title="PyPI" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-python"></i></span>
+            <label class="sr-only">PyPI</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api.html">API Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api/compas_rui.html">compas_rui</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/compas_rui.forms.html">forms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/compas_rui.scene.html">scene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/compas_rui.values.html">values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="sidebar-primary-item"><div class="sidebar-primary-item">
+    <a href="https://compas.dev" target="_blank">
+        COMPAS.dev <i class="fa fa-external-link" aria-hidden="true"></i>
+    </a>
+</div></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.add.html#compas_rui.scene.RUIMeshObject.add">add() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.add_to_group.html#compas_rui.scene.RUIMeshObject.add_to_group">add_to_group() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.values.BoolValue.html#compas_rui.values.BoolValue">BoolValue (class in compas_rui.values)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.values.BoolValue.cast.html#compas_rui.values.BoolValue.cast">cast() (compas_rui.values.BoolValue method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.ColorValue.cast.html#compas_rui.values.ColorValue.cast">(compas_rui.values.ColorValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.cast.html#compas_rui.values.DictValue.cast">(compas_rui.values.DictValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.cast.html#compas_rui.values.FloatValue.cast">(compas_rui.values.FloatValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.cast.html#compas_rui.values.IntValue.cast">(compas_rui.values.IntValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.cast.html#compas_rui.values.ListValue.cast">(compas_rui.values.ListValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.cast.html#compas_rui.values.StrValue.cast">(compas_rui.values.StrValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.cast.html#compas_rui.values.Value.cast">(compas_rui.values.Value method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/compas_rui.values.BoolValue.check.html#compas_rui.values.BoolValue.check">check() (compas_rui.values.BoolValue method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.ColorValue.check.html#compas_rui.values.ColorValue.check">(compas_rui.values.ColorValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.check.html#compas_rui.values.DictValue.check">(compas_rui.values.DictValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.check.html#compas_rui.values.FloatValue.check">(compas_rui.values.FloatValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.check.html#compas_rui.values.IntValue.check">(compas_rui.values.IntValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.check.html#compas_rui.values.ListValue.check">(compas_rui.values.ListValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.check.html#compas_rui.values.StrValue.check">(compas_rui.values.StrValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.check.html#compas_rui.values.Value.check">(compas_rui.values.Value method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.clear.html#compas_rui.scene.RUIMeshObject.clear">clear() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.clear_conduits.html#compas_rui.scene.RUIMeshObject.clear_conduits">clear_conduits() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.clear_edges.html#compas_rui.scene.RUIMeshObject.clear_edges">clear_edges() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.clear_faces.html#compas_rui.scene.RUIMeshObject.clear_faces">clear_faces() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.clear_layer.html#compas_rui.scene.RUIMeshObject.clear_layer">clear_layer() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.clear_vertices.html#compas_rui.scene.RUIMeshObject.clear_vertices">clear_vertices() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.values.ColorValue.html#compas_rui.values.ColorValue">ColorValue (class in compas_rui.values)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.compile_attributes.html#compas_rui.scene.RUIMeshObject.compile_attributes">compile_attributes() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.copy.html#compas_rui.scene.RUIMeshObject.copy">copy() (compas_rui.scene.RUIMeshObject method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.BoolValue.copy.html#compas_rui.values.BoolValue.copy">(compas_rui.values.BoolValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ColorValue.copy.html#compas_rui.values.ColorValue.copy">(compas_rui.values.ColorValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.copy.html#compas_rui.values.DictValue.copy">(compas_rui.values.DictValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.copy.html#compas_rui.values.FloatValue.copy">(compas_rui.values.FloatValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.copy.html#compas_rui.values.IntValue.copy">(compas_rui.values.IntValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.copy.html#compas_rui.values.ListValue.copy">(compas_rui.values.ListValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.copy.html#compas_rui.values.StrValue.copy">(compas_rui.values.StrValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.copy.html#compas_rui.values.Value.copy">(compas_rui.values.Value method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.values.DictValue.html#compas_rui.values.DictValue">DictValue (class in compas_rui.values)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.draw.html#compas_rui.scene.RUIMeshObject.draw">draw() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.draw_edgelabels.html#compas_rui.scene.RUIMeshObject.draw_edgelabels">draw_edgelabels() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.draw_edges.html#compas_rui.scene.RUIMeshObject.draw_edges">draw_edges() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.draw_facelabels.html#compas_rui.scene.RUIMeshObject.draw_facelabels">draw_facelabels() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.draw_facenormals.html#compas_rui.scene.RUIMeshObject.draw_facenormals">draw_facenormals() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.draw_faces.html#compas_rui.scene.RUIMeshObject.draw_faces">draw_faces() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.draw_mesh.html#compas_rui.scene.RUIMeshObject.draw_mesh">draw_mesh() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.draw_vertexlabels.html#compas_rui.scene.RUIMeshObject.draw_vertexlabels">draw_vertexlabels() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.draw_vertexnormals.html#compas_rui.scene.RUIMeshObject.draw_vertexnormals">draw_vertexnormals() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.draw_vertices.html#compas_rui.scene.RUIMeshObject.draw_vertices">draw_vertices() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.values.FloatValue.html#compas_rui.values.FloatValue">FloatValue (class in compas_rui.values)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.from_json.html#compas_rui.scene.RUIMeshObject.from_json">from_json() (compas_rui.scene.RUIMeshObject class method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.BoolValue.from_json.html#compas_rui.values.BoolValue.from_json">(compas_rui.values.BoolValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ColorValue.from_json.html#compas_rui.values.ColorValue.from_json">(compas_rui.values.ColorValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.from_json.html#compas_rui.values.DictValue.from_json">(compas_rui.values.DictValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.from_json.html#compas_rui.values.FloatValue.from_json">(compas_rui.values.FloatValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.from_json.html#compas_rui.values.IntValue.from_json">(compas_rui.values.IntValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.from_json.html#compas_rui.values.ListValue.from_json">(compas_rui.values.ListValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.from_json.html#compas_rui.values.StrValue.from_json">(compas_rui.values.StrValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.from_json.html#compas_rui.values.Value.from_json">(compas_rui.values.Value class method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.from_jsonstring.html#compas_rui.scene.RUIMeshObject.from_jsonstring">from_jsonstring() (compas_rui.scene.RUIMeshObject class method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.BoolValue.from_jsonstring.html#compas_rui.values.BoolValue.from_jsonstring">(compas_rui.values.BoolValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ColorValue.from_jsonstring.html#compas_rui.values.ColorValue.from_jsonstring">(compas_rui.values.ColorValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.from_jsonstring.html#compas_rui.values.DictValue.from_jsonstring">(compas_rui.values.DictValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.from_jsonstring.html#compas_rui.values.FloatValue.from_jsonstring">(compas_rui.values.FloatValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.from_jsonstring.html#compas_rui.values.IntValue.from_jsonstring">(compas_rui.values.IntValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.from_jsonstring.html#compas_rui.values.ListValue.from_jsonstring">(compas_rui.values.ListValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.from_jsonstring.html#compas_rui.values.StrValue.from_jsonstring">(compas_rui.values.StrValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.from_jsonstring.html#compas_rui.values.Value.from_jsonstring">(compas_rui.values.Value class method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.get_group.html#compas_rui.scene.RUIMeshObject.get_group">get_group() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.values.IntValue.html#compas_rui.values.IntValue">IntValue (class in compas_rui.values)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.values.ListValue.html#compas_rui.values.ListValue">ListValue (class in compas_rui.values)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.move.html#compas_rui.scene.RUIMeshObject.move">move() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.move_vertex.html#compas_rui.scene.RUIMeshObject.move_vertex">move_vertex() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.move_vertices.html#compas_rui.scene.RUIMeshObject.move_vertices">move_vertices() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.move_vertices_direction.html#compas_rui.scene.RUIMeshObject.move_vertices_direction">move_vertices_direction() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.remove.html#compas_rui.scene.RUIMeshObject.remove">remove() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.html#compas_rui.scene.RUIMeshObject">RUIMeshObject (class in compas_rui.scene)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.select_edges.html#compas_rui.scene.RUIMeshObject.select_edges">select_edges() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.select_vertices.html#compas_rui.scene.RUIMeshObject.select_vertices">select_vertices() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.values.BoolValue.set.html#compas_rui.values.BoolValue.set">set() (compas_rui.values.BoolValue method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.ColorValue.set.html#compas_rui.values.ColorValue.set">(compas_rui.values.ColorValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.set.html#compas_rui.values.DictValue.set">(compas_rui.values.DictValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.set.html#compas_rui.values.FloatValue.set">(compas_rui.values.FloatValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.set.html#compas_rui.values.IntValue.set">(compas_rui.values.IntValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.set.html#compas_rui.values.ListValue.set">(compas_rui.values.ListValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.set.html#compas_rui.values.StrValue.set">(compas_rui.values.StrValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.set.html#compas_rui.values.Value.set">(compas_rui.values.Value method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.sha256.html#compas_rui.scene.RUIMeshObject.sha256">sha256() (compas_rui.scene.RUIMeshObject method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.BoolValue.sha256.html#compas_rui.values.BoolValue.sha256">(compas_rui.values.BoolValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ColorValue.sha256.html#compas_rui.values.ColorValue.sha256">(compas_rui.values.ColorValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.sha256.html#compas_rui.values.DictValue.sha256">(compas_rui.values.DictValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.sha256.html#compas_rui.values.FloatValue.sha256">(compas_rui.values.FloatValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.sha256.html#compas_rui.values.IntValue.sha256">(compas_rui.values.IntValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.sha256.html#compas_rui.values.ListValue.sha256">(compas_rui.values.ListValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.sha256.html#compas_rui.values.StrValue.sha256">(compas_rui.values.StrValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.sha256.html#compas_rui.values.Value.sha256">(compas_rui.values.Value method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/compas_rui.values.StrValue.html#compas_rui.values.StrValue">StrValue (class in compas_rui.values)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.to_json.html#compas_rui.scene.RUIMeshObject.to_json">to_json() (compas_rui.scene.RUIMeshObject method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.BoolValue.to_json.html#compas_rui.values.BoolValue.to_json">(compas_rui.values.BoolValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ColorValue.to_json.html#compas_rui.values.ColorValue.to_json">(compas_rui.values.ColorValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.to_json.html#compas_rui.values.DictValue.to_json">(compas_rui.values.DictValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.to_json.html#compas_rui.values.FloatValue.to_json">(compas_rui.values.FloatValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.to_json.html#compas_rui.values.IntValue.to_json">(compas_rui.values.IntValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.to_json.html#compas_rui.values.ListValue.to_json">(compas_rui.values.ListValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.to_json.html#compas_rui.values.StrValue.to_json">(compas_rui.values.StrValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.to_json.html#compas_rui.values.Value.to_json">(compas_rui.values.Value method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.to_jsonstring.html#compas_rui.scene.RUIMeshObject.to_jsonstring">to_jsonstring() (compas_rui.scene.RUIMeshObject method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.BoolValue.to_jsonstring.html#compas_rui.values.BoolValue.to_jsonstring">(compas_rui.values.BoolValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ColorValue.to_jsonstring.html#compas_rui.values.ColorValue.to_jsonstring">(compas_rui.values.ColorValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.to_jsonstring.html#compas_rui.values.DictValue.to_jsonstring">(compas_rui.values.DictValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.to_jsonstring.html#compas_rui.values.FloatValue.to_jsonstring">(compas_rui.values.FloatValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.to_jsonstring.html#compas_rui.values.IntValue.to_jsonstring">(compas_rui.values.IntValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.to_jsonstring.html#compas_rui.values.ListValue.to_jsonstring">(compas_rui.values.ListValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.to_jsonstring.html#compas_rui.values.StrValue.to_jsonstring">(compas_rui.values.StrValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.to_jsonstring.html#compas_rui.values.Value.to_jsonstring">(compas_rui.values.Value method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.ToString.html#compas_rui.scene.RUIMeshObject.ToString">ToString() (compas_rui.scene.RUIMeshObject method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.BoolValue.ToString.html#compas_rui.values.BoolValue.ToString">(compas_rui.values.BoolValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ColorValue.ToString.html#compas_rui.values.ColorValue.ToString">(compas_rui.values.ColorValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.ToString.html#compas_rui.values.DictValue.ToString">(compas_rui.values.DictValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.ToString.html#compas_rui.values.FloatValue.ToString">(compas_rui.values.FloatValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.ToString.html#compas_rui.values.IntValue.ToString">(compas_rui.values.IntValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.ToString.html#compas_rui.values.ListValue.ToString">(compas_rui.values.ListValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.ToString.html#compas_rui.values.StrValue.ToString">(compas_rui.values.StrValue method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.ToString.html#compas_rui.values.Value.ToString">(compas_rui.values.Value method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.traverse.html#compas_rui.scene.RUIMeshObject.traverse">traverse() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.update_attributes.html#compas_rui.scene.RUIMeshObject.update_attributes">update_attributes() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.update_edge_attributes.html#compas_rui.scene.RUIMeshObject.update_edge_attributes">update_edge_attributes() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.update_face_attributes.html#compas_rui.scene.RUIMeshObject.update_face_attributes">update_face_attributes() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.update_vertex_attributes.html#compas_rui.scene.RUIMeshObject.update_vertex_attributes">update_vertex_attributes() (compas_rui.scene.RUIMeshObject method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.scene.RUIMeshObject.validate_data.html#compas_rui.scene.RUIMeshObject.validate_data">validate_data() (compas_rui.scene.RUIMeshObject class method)</a>
+
+      <ul>
+        <li><a href="api/generated/compas_rui.values.BoolValue.validate_data.html#compas_rui.values.BoolValue.validate_data">(compas_rui.values.BoolValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ColorValue.validate_data.html#compas_rui.values.ColorValue.validate_data">(compas_rui.values.ColorValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.DictValue.validate_data.html#compas_rui.values.DictValue.validate_data">(compas_rui.values.DictValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.FloatValue.validate_data.html#compas_rui.values.FloatValue.validate_data">(compas_rui.values.FloatValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.IntValue.validate_data.html#compas_rui.values.IntValue.validate_data">(compas_rui.values.IntValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.ListValue.validate_data.html#compas_rui.values.ListValue.validate_data">(compas_rui.values.ListValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.StrValue.validate_data.html#compas_rui.values.StrValue.validate_data">(compas_rui.values.StrValue class method)</a>
+</li>
+        <li><a href="api/generated/compas_rui.values.Value.validate_data.html#compas_rui.values.Value.validate_data">(compas_rui.values.Value class method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/generated/compas_rui.values.Value.html#compas_rui.values.Value">Value (class in compas_rui.values)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright ETH Zurich - Block Research Group.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
