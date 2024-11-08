@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Added
+
+* Added `RhinoMeshObject.select_faces()`.
+* Added `RhinoMeshObject.select_vertices_all()`.
+* Added `RhinoMeshObject.select_vertices_boundary()`.
+* Added `RhinoMeshObject.select_vertices_degree()`.
+* Added `RhinoMeshObject.select_vertices_edgeloop()`.
+* Added `RhinoMeshObject.select_vertices_edgestrip()`.
+* Added `RhinoMeshObject.select_vertices_manual()`.
+* Added `RhinoMeshObject.select_edges_all()`.
+* Added `RhinoMeshObject.select_edges_boundary()`.
+* Added `RhinoMeshObject.select_edges_loop()`.
+* Added `RhinoMeshObject.select_edges_strip()`.
+* Added `RhinoMeshObject.select_edges_manual()`.
+* Added `RhinoMeshObject.select_faces_all()`.
+* Added `RhinoMeshObject.select_faces_boundary()`.
+* Added `RhinoMeshObject.select_faces_strip()`.
+* Added `RhinoMeshObject.select_faces_manual()`.
+
+### Changed
+
+### Removed
+
 ## [0.3.2] 2024-11-07
 
 ### Added

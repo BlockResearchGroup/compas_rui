@@ -30,32 +30,22 @@ class RUIMeshObject(RhinoMeshObject):
             return
 
         if option == "All":
-            vertices = list(self.mesh.vertices())
+            vertices = self.select_vertices_all()
 
         elif option == "Boundary":
-            vertices = list(set(flatten(self.mesh.vertices_on_boundaries())))
+            vertices = self.select_vertices_boundary()
 
         elif option == "Degree":
-            D = rs.GetInteger(message="Vertex Degree", number=2, minimum=1)
-            D = D or 0
-            vertices = list(self.mesh.vertices_where(vertex_degree=D))
+            vertices = self.select_vertices_degree()
 
         elif option == "EdgeLoop":
-            guids = compas_rhino.objects.select_lines(message="Select Loop Edges")
-            edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
-            temp = []
-            for edge in edges:
-                for u, v in self.mesh.edge_loop(edge):
-                    temp.append(u)
-                    temp.append(v)
-            vertices = list(set(temp))
+            vertices = self.select_vertices_edgeloop()
 
         elif option == "EdgeStrip":
-            raise NotImplementedError
+            vertices = self.select_vertices_edgestrip()
 
         elif option == "Manual":
-            guids = compas_rhino.objects.select_points(message="Select Manual Vertices")
-            vertices = [self._guid_vertex[guid] for guid in guids if guid in self._guid_vertex] if guids else []
+            vertices = self.select_vertices_manual()
 
         vertex_guid = {vertex: guid for guid, vertex in self._guid_vertex.items()}
         guids = [vertex_guid[vertex] for vertex in vertices]
@@ -65,6 +55,37 @@ class RUIMeshObject(RhinoMeshObject):
 
         return vertices
 
+    def select_vertices_all(self):
+        return list(self.mesh.vertices())
+
+    def select_vertices_boundary(self):
+        return list(set(flatten(self.mesh.vertices_on_boundaries())))
+
+    def select_vertices_degree(self):
+        D = rs.GetInteger(message="Vertex Degree", number=2, minimum=1)
+        D = D or 0
+        vertices = list(self.mesh.vertices_where(vertex_degree=D))
+        return vertices
+
+    def select_vertices_edgeloop(self):
+        guids = compas_rhino.objects.select_lines(message="Select Loop Edges")
+        edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
+        temp = []
+        for edge in edges:
+            for u, v in self.mesh.edge_loop(edge):
+                temp.append(u)
+                temp.append(v)
+        vertices = list(set(temp))
+        return vertices
+
+    def select_vertices_edgestrip(self):
+        raise NotImplementedError
+
+    def select_vertices_manual(self):
+        guids = compas_rhino.objects.select_points(message="Select Vertices")
+        vertices = [self._guid_vertex[guid] for guid in guids if guid in self._guid_vertex] if guids else []
+        return vertices
+
     def select_edges(self, message="Select Edges") -> list[tuple[int, int]]:
         options = ["All", "Boundary", "EdgeLoop", "EdgeStrip", "Manual"]
         option = rs.GetString(message=message, strings=options)
@@ -72,30 +93,19 @@ class RUIMeshObject(RhinoMeshObject):
             return
 
         if option == "All":
-            edges = list(self.mesh.edges())
+            edges = self.select_edges_all()
 
         elif option == "Boundary":
-            edges = list(set(flatten(self.mesh.edges_on_boundaries())))
+            edges = self.select_edges_boundary()
 
         elif option == "EdgeLoop":
-            guids = compas_rhino.objects.select_lines(message="Select Loop Edges")
-            edges = []
-            for guid in guids:
-                edge = self._guid_edge[guid]
-                for edge in self.mesh.edge_loop(edge):
-                    edges.append(edge)
+            edges = self.select_edges_loop()
 
         elif option == "EdgeStrip":
-            guids = compas_rhino.objects.select_lines(message="Select Strip Edges")
-            edges = []
-            for guid in guids:
-                edge = self._guid_edge[guid]
-                for edge in self.mesh.edge_strip(edge):
-                    edges.append(edge)
+            edges = self.select_edges_strip()
 
         elif option == "Manual":
-            guids = compas_rhino.objects.select_lines(message="Select Manual Edges")
-            edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
+            edges = self.select_edges_manual()
 
         edges = [(u, v) if self.mesh.has_edge((u, v)) else (v, u) for u, v in edges]
         edge_guid = {edge: guid for guid, edge in self._guid_edge.items()}
@@ -105,6 +115,75 @@ class RUIMeshObject(RhinoMeshObject):
         rs.SelectObjects(guids)
 
         return edges
+
+    def select_edges_all(self):
+        return list(self.mesh.edges())
+
+    def select_edges_boundary(self):
+        return list(set(flatten(self.mesh.edges_on_boundaries())))
+
+    def select_edges_loop(self):
+        guids = compas_rhino.objects.select_lines(message="Select Loop Edges")
+        edges = []
+        for guid in guids:
+            edge = self._guid_edge[guid]
+            for edge in self.mesh.edge_loop(edge):
+                edges.append(edge)
+        return edges
+
+    def select_edges_strip(self):
+        guids = compas_rhino.objects.select_lines(message="Select Strip Edges")
+        edges = []
+        for guid in guids:
+            edge = self._guid_edge[guid]
+            for edge in self.mesh.edge_strip(edge):
+                edges.append(edge)
+        return edges
+
+    def select_edges_manual(self):
+        guids = compas_rhino.objects.select_lines(message="Select Edges")
+        edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
+        return edges
+
+    def select_faces(self, message="Select Faces") -> list[int]:
+        options = ["All", "Boundary", "Strip", "Manual"]
+        option = rs.GetString(message=message, strings=options)
+        if not option:
+            return
+
+        if option == "All":
+            faces = self.select_faces_all()
+
+        elif option == "Boundary":
+            faces = self.select_faces_boundary()
+
+        elif option == "Strip":
+            faces = self.select_faces_strip()
+
+        elif option == "Manual":
+            faces = self.select_faces_manual()
+
+        face_guid = {face: guid for guid, face in self._guid_face.items()}
+        guids = [face_guid[face] for face in faces]
+
+        rs.UnselectAllObjects()
+        rs.SelectObjects(guids)
+
+        return faces
+
+    def select_faces_all(self):
+        return list(self.mesh.faces())
+
+    def select_faces_boundary(self):
+        return list(set(flatten(self.mesh.faces_on_boundaries())))
+
+    def select_faces_strip(self):
+        raise NotImplementedError
+
+    def select_faces_manual(self):
+        guids = compas_rhino.objects.select_meshes(message="Select Faces")
+        faces = [self._guid_face[guid] for guid in guids if guid in self._guid_face] if guids else []
+        return faces
 
     # =============================================================================
     # =============================================================================
