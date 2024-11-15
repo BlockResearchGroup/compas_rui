@@ -24,7 +24,7 @@ class RUIMeshObject(RhinoMeshObject):
     # =============================================================================
 
     def select_vertices(self, message="Select Vertices") -> list[int]:
-        options = ["All", "Boundary", "Degree", "EdgeLoop", "EdgeStrip", "Manual"]
+        options = ["All", "Boundary", "Degree", "EdgeLoop", "Manual"]
         option = rs.GetString(message=message, strings=options)
         if not option:
             return
@@ -40,9 +40,6 @@ class RUIMeshObject(RhinoMeshObject):
 
         elif option == "EdgeLoop":
             vertices = self.select_vertices_edgeloop()
-
-        elif option == "EdgeStrip":
-            vertices = self.select_vertices_edgestrip()
 
         elif option == "Manual":
             vertices = self.select_vertices_manual()

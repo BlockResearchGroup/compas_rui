@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 * Removed `compas` from requirements to solve problem in Rhino plugins.
-
+* Removed selection of vertices on edge strip.
 
 ## [0.4.1] 2024-11-09
 

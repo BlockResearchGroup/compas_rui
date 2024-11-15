@@ -160,8 +160,9 @@ class Rui(object):
 
     """
 
-    def __init__(self, filepath):
+    def __init__(self, filepath, guid=None):
         self.filepath = filepath
+        self.guid = guid or uuid.uuid4()
         self.icons = []
         self.macros = {}
         self.toolbars = {}
@@ -187,7 +188,7 @@ class Rui(object):
 
     def init(self):
         with open(self.filepath, "w+") as f:
-            f.write(TPL_RUI.format(uuid.uuid4(), uuid.uuid4()))
+            f.write(TPL_RUI.format(self.guid, self.guid))
         self.xml = ET.parse(self.filepath)
         self.root = self.xml.getroot()
         self.root_bitmaps = self.root.find("bitmaps")
@@ -207,13 +208,17 @@ class Rui(object):
             fh.write(xml)
 
     @classmethod
-    def from_json(cls, uipath, ruipath):
+    def from_json(cls, uipath, ruipath, guid=None) -> "Rui":
         """Construct a RUI object from a JSON config file.
 
         Parameters
         ----------
-        configpath : str
-            Path to the config file.
+        uipath : str
+            Path to the UI config file.
+        ruipath : str
+            Path of the output file.
+        guid : uuid, optional
+            The guid of the plugin.
 
         Returns
         -------
@@ -225,7 +230,7 @@ class Rui(object):
         with open(uipath, "r") as f:
             ui = json.load(f)
 
-        self = cls(ruipath)
+        self = cls(ruipath, guid=guid)
         self.init()
         if ui["icons"]["bitmap"]:
             bitmap = os.path.join(root, ui["icons"]["bitmap"])
@@ -310,7 +315,9 @@ class Rui(object):
                 icon_guid,
             )
         else:
-            s_macro = TPL_MACRO.format(guid, name, script, tooltip, help_text, button_text, menu_text)
+            s_macro = TPL_MACRO.format(
+                guid, name, script, tooltip, help_text, button_text, menu_text
+            )
         e_macro = ET.fromstring(s_macro)
         self.root_macros.append(e_macro)
         self.macros[name] = e_macro
