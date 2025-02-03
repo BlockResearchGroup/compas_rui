@@ -42,7 +42,7 @@ class RUIMeshObject(RhinoMeshObject):
             vertices = self.select_vertices_edgeloop()
 
         elif option == "Manual":
-            vertices = self.select_vertices_manual()
+            vertices = self.select_vertices_manual(message)
 
         vertex_guid = {vertex: guid for guid, vertex in self._guid_vertex.items()}
         guids = [vertex_guid[vertex] for vertex in vertices]
@@ -78,8 +78,8 @@ class RUIMeshObject(RhinoMeshObject):
     def select_vertices_edgestrip(self):
         raise NotImplementedError
 
-    def select_vertices_manual(self):
-        guids = compas_rhino.objects.select_points(message="Select Vertices")
+    def select_vertices_manual(self, message="Select Vertices"):
+        guids = compas_rhino.objects.select_points(message=message)
         vertices = [self._guid_vertex[guid] for guid in guids if guid in self._guid_vertex] if guids else []
         return vertices
 
@@ -102,7 +102,7 @@ class RUIMeshObject(RhinoMeshObject):
             edges = self.select_edges_strip()
 
         elif option == "Manual":
-            edges = self.select_edges_manual()
+            edges = self.select_edges_manual(message)
 
         edges = [(u, v) if self.mesh.has_edge((u, v)) else (v, u) for u, v in edges]
         edge_guid = {edge: guid for guid, edge in self._guid_edge.items()}
@@ -137,8 +137,8 @@ class RUIMeshObject(RhinoMeshObject):
                 edges.append(edge)
         return edges
 
-    def select_edges_manual(self):
-        guids = compas_rhino.objects.select_lines(message="Select Edges")
+    def select_edges_manual(self, message="Select Edges"):
+        guids = compas_rhino.objects.select_lines(message=message)
         edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
         return edges
 
@@ -300,14 +300,20 @@ class RUIMeshObject(RhinoMeshObject):
         edges = list(self.mesh.edges())
 
         def OnDynamicDraw(sender, e):
-            current = e.CurrentPoint
-            vector = current - start
-            for vertex in vertex_p1:
-                vertex_p1[vertex] = vertex_p0[vertex] + vector
-            for u, v in iter(edges):
-                sp = vertex[u]
-                ep = vertex[v]
-                e.Display.DrawDottedLine(sp, ep, color)
+            try:
+                current = e.CurrentPoint
+                vector = current - start
+
+                for v in vertex_p1:
+                    vertex_p1[v] = vertex_p0[v] + vector
+
+                for u, v in iter(edges):
+                    sp = vertex_p0[u]
+                    ep = vertex_p1[v]
+                    e.Display.DrawDottedLine(sp, ep, color)
+
+            except Exception as e:
+                print(e)
 
         gp = Rhino.Input.Custom.GetPoint()
 
