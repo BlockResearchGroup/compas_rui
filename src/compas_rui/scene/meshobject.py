@@ -23,8 +23,12 @@ class RUIMeshObject(RhinoMeshObject):
     # =============================================================================
     # =============================================================================
 
-    def select_vertices(self, message="Select Vertices") -> list[int]:
-        options = ["All", "Boundary", "Degree", "EdgeLoop", "Manual"]
+    def select_vertices(self, message="Select Vertices", use_edges=True) -> list[int]:
+        if use_edges:
+            options = ["All", "Boundary", "Degree", "EdgeLoop", "Manual"]
+        else:
+            options = ["All", "Boundary", "Degree", "Manual"]
+
         option = rs.GetString(message=message, strings=options)
         if not option:
             return
@@ -45,7 +49,7 @@ class RUIMeshObject(RhinoMeshObject):
             vertices = self.select_vertices_manual(message)
 
         vertex_guid = {vertex: guid for guid, vertex in self._guid_vertex.items()}
-        guids = [vertex_guid[vertex] for vertex in vertices]
+        guids = [vertex_guid[vertex] for vertex in vertices if vertex in vertex_guid]
 
         rs.UnselectAllObjects()
         rs.SelectObjects(guids)
@@ -106,7 +110,7 @@ class RUIMeshObject(RhinoMeshObject):
 
         edges = [(u, v) if self.mesh.has_edge((u, v)) else (v, u) for u, v in edges]
         edge_guid = {edge: guid for guid, edge in self._guid_edge.items()}
-        guids = [edge_guid[edge] for edge in edges]
+        guids = [edge_guid[edge] for edge in edges if edge in edge_guid]
 
         rs.UnselectAllObjects()
         rs.SelectObjects(guids)

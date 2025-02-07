@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* Added `use_edges` parameter to `RUIMeshObject.select_vertices`.
+
 ### Changed
+
+* Changed `guid` retrieval to not fail when edges or vertices are missing from the dict.
 
 ### Removed
 
