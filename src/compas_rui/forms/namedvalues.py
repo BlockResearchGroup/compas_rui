@@ -127,9 +127,3 @@ class NamedValuesForm(Eto.Forms.Dialog[bool]):
 
     def show(self):
         return self.ShowModal(Rhino.UI.RhinoEtoApp.MainWindow)
-
-
-if __name__ == "__main__":
-    form = NamedValuesForm(names=["a", "b"], values=[1, 2])
-    if form.show():
-        print(form.attributes)
