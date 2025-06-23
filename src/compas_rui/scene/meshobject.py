@@ -13,7 +13,7 @@ from compas_rui.forms import NamedValuesForm
 
 
 class RUIMeshObject(RhinoMeshObject):
-    mesh: Mesh
+    mesh: Mesh  # type: ignore
 
     # =============================================================================
     # =============================================================================
@@ -23,15 +23,13 @@ class RUIMeshObject(RhinoMeshObject):
     # =============================================================================
     # =============================================================================
 
-    def select_vertices(self, message="Select Vertices", use_edges=True) -> list[int]:
+    def select_vertices(self, message="Select Vertices", use_edges=True) -> Optional[list[int]]:
         if use_edges:
             options = ["All", "Boundary", "Degree", "EdgeLoop", "Manual"]
         else:
             options = ["All", "Boundary", "Degree", "Manual"]
 
         option = rs.GetString(message=message, strings=options)
-        if not option:
-            return
 
         if option == "All":
             vertices = self.select_vertices_all()
@@ -48,13 +46,16 @@ class RUIMeshObject(RhinoMeshObject):
         elif option == "Manual":
             vertices = self.select_vertices_manual(message)
 
+        else:
+            return
+
         vertex_guid = {vertex: guid for guid, vertex in self._guid_vertex.items()}
         guids = [vertex_guid[vertex] for vertex in vertices if vertex in vertex_guid]
 
         rs.UnselectAllObjects()
         rs.SelectObjects(guids)
 
-        return vertices
+        return vertices  # type: ignore
 
     def select_vertices_all(self):
         return list(self.mesh.vertices())
@@ -87,11 +88,9 @@ class RUIMeshObject(RhinoMeshObject):
         vertices = [self._guid_vertex[guid] for guid in guids if guid in self._guid_vertex] if guids else []
         return vertices
 
-    def select_edges(self, message="Select Edges") -> list[tuple[int, int]]:
+    def select_edges(self, message="Select Edges") -> Optional[tuple[int, int]]:
         options = ["All", "Boundary", "EdgeLoop", "EdgeStrip", "Manual"]
         option = rs.GetString(message=message, strings=options)
-        if not option:
-            return
 
         if option == "All":
             edges = self.select_edges_all()
@@ -108,6 +107,9 @@ class RUIMeshObject(RhinoMeshObject):
         elif option == "Manual":
             edges = self.select_edges_manual(message)
 
+        else:
+            return
+
         edges = [(u, v) if self.mesh.has_edge((u, v)) else (v, u) for u, v in edges]
         edge_guid = {edge: guid for guid, edge in self._guid_edge.items()}
         guids = [edge_guid[edge] for edge in edges if edge in edge_guid]
@@ -115,7 +117,7 @@ class RUIMeshObject(RhinoMeshObject):
         rs.UnselectAllObjects()
         rs.SelectObjects(guids)
 
-        return edges
+        return edges  # type: ignore
 
     def select_edges_all(self):
         return list(self.mesh.edges())
@@ -146,11 +148,9 @@ class RUIMeshObject(RhinoMeshObject):
         edges = [self._guid_edge[guid] for guid in guids if guid in self._guid_edge] if guids else []
         return edges
 
-    def select_faces(self, message="Select Faces") -> list[int]:
+    def select_faces(self, message="Select Faces") -> Optional[list[int]]:
         options = ["All", "Boundary", "Strip", "Manual"]
         option = rs.GetString(message=message, strings=options)
-        if not option:
-            return
 
         if option == "All":
             faces = self.select_faces_all()
@@ -164,13 +164,16 @@ class RUIMeshObject(RhinoMeshObject):
         elif option == "Manual":
             faces = self.select_faces_manual()
 
+        else:
+            return
+
         face_guid = {face: guid for guid, face in self._guid_face.items()}
         guids = [face_guid[face] for face in faces]
 
         rs.UnselectAllObjects()
         rs.SelectObjects(guids)
 
-        return faces
+        return faces  # type: ignore
 
     def select_faces_all(self):
         return list(self.mesh.faces())
@@ -517,3 +520,40 @@ class RUIMeshObject(RhinoMeshObject):
     def clear(self):
         super().clear()
         self.clear_conduits()
+
+    # =============================================================================
+    # =============================================================================
+    # =============================================================================
+    # Redraw
+    # =============================================================================
+    # =============================================================================
+    # =============================================================================
+    # =============================================================================
+
+    def redraw(self):
+        rs.EnableRedraw(False)
+        self.clear()
+        self.draw()
+        rs.EnableRedraw(True)
+        rs.Redraw()
+
+    def redraw_vertices(self):
+        rs.EnableRedraw(False)
+        self.clear_vertices()
+        self.draw_vertices()
+        rs.EnableRedraw(True)
+        rs.Redraw()
+
+    def redraw_edges(self):
+        rs.EnableRedraw(False)
+        self.clear_edges()
+        self.draw_edges()
+        rs.EnableRedraw(True)
+        rs.Redraw()
+
+    def redraw_faces(self):
+        rs.EnableRedraw(False)
+        self.clear_faces()
+        self.draw_faces()
+        rs.EnableRedraw(True)
+        rs.Redraw()
