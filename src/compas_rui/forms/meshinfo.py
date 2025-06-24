@@ -206,7 +206,6 @@ class Table(object):
 
         self.widget = Eto.Forms.GridView()
         self.widget.ShowHeader = True
-        self.widget.DataStore = rows
 
         for i, col in enumerate(cols):
             column = Eto.Forms.GridColumn()
@@ -217,6 +216,15 @@ class Table(object):
             cell.TextAlignment = Eto.Forms.TextAlignment.Right
             column.DataCell = cell
             self.widget.Columns.Add(column)
+
+        collection = []
+        for row in rows:
+            item = Eto.Forms.GridItem()
+            values = tuple(str(val) if val is not None else "" for val in row)
+            item.Values = values
+            collection.append(item)
+
+        self.widget.DataStore = collection
 
         # self.widget.CellFormatting += on_cell_formatting
 
