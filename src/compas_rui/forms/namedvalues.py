@@ -32,14 +32,12 @@ class NamedValuesForm(Eto.Forms.Dialog[bool]):
 
     def __init__(
         self,
-        names,  # type: list[str]
-        values,  # type: list
-        title="Named Values",  # type: str
-        width=500,  # type: int
-        height=500,  # type: int
-    ):
-        # type: (...) -> None
-
+        names: list[str],
+        values: list,
+        title: str = "Named Values",
+        width: int = 500,
+        height: int = 500,
+    ) -> None:
         super().__init__()
 
         def on_cell_formatting(sender, e):

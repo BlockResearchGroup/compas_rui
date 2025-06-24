@@ -11,7 +11,7 @@ class ListValue(Value):
 
     def _check_list_value_type(self, value):
         for i, item in enumerate(value):
-            if not isinstance(item, self.list_value_type):
+            if self.list_value_type and not isinstance(item, self.list_value_type):
                 raise ValueError("List item {}:{} is not of type {}".format(i, item, self.list_value_type))
 
     def check(self, value):
@@ -28,7 +28,7 @@ class ListValue(Value):
             "value": self.value,
             "value_type": "list",
             "options": self.options,
-            "list_value_type": self.list_value_type.__name__,
+            "list_value_type": self.list_value_type.__name__ if self.list_value_type else None,
         }
 
     @data.setter

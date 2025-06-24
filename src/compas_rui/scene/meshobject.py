@@ -222,7 +222,7 @@ class RUIMeshObject(RhinoMeshObject):
         names = names or sorted(self.mesh.default_vertex_attributes.keys())
         names = sorted([name for name in names if not name.startswith("_")])
 
-        values = self.mesh.vertex_attributes(vertices[0], names)
+        values: list = self.mesh.vertex_attributes(vertices[0], names)  # type: ignore
         if len(vertices) > 1:
             for i, name in enumerate(names):
                 for vertex in vertices[1:]:
@@ -247,7 +247,7 @@ class RUIMeshObject(RhinoMeshObject):
         names = names or sorted(self.mesh.default_face_attributes.keys())
         names = sorted([name for name in names if not name.startswith("_")])
 
-        values = self.mesh.face_attributes(faces[0], names)
+        values: list = self.mesh.face_attributes(faces[0], names)  # type: ignore
         if len(faces) > 1:
             for i, name in enumerate(names):
                 for face in faces[1:]:
@@ -272,7 +272,7 @@ class RUIMeshObject(RhinoMeshObject):
         names = names or sorted(self.mesh.default_edge_attributes.keys())
         names = sorted([name for name in names if not name.startswith("_")])
 
-        values = self.mesh.edge_attributes(edges[0], names)
+        values: list = self.mesh.edge_attributes(edges[0], names)  # type: ignore
         if len(edges) > 1:
             for i, name in enumerate(names):
                 for edge in edges[1:]:
@@ -301,8 +301,8 @@ class RUIMeshObject(RhinoMeshObject):
     def move(self) -> bool:
         color = Rhino.ApplicationSettings.AppearanceSettings.FeedbackColor
 
-        vertex_p0 = {v: Rhino.Geometry.Point3d(*self.mesh.vertex_coordinates(v)) for v in self.mesh.vertices()}
-        vertex_p1 = {v: Rhino.Geometry.Point3d(*self.mesh.vertex_coordinates(v)) for v in self.mesh.vertices()}
+        vertex_p0 = {v: Rhino.Geometry.Point3d(*self.mesh.vertex_coordinates(v)) for v in self.mesh.vertices()}  # type: ignore
+        vertex_p1 = {v: Rhino.Geometry.Point3d(*self.mesh.vertex_coordinates(v)) for v in self.mesh.vertices()}  # type: ignore
 
         edges = list(self.mesh.edges())
 
@@ -343,7 +343,8 @@ class RUIMeshObject(RhinoMeshObject):
         end = gp.Point()
         vector = compas_rhino.conversions.vector_to_compas(end - start)
 
-        for _, attr in self.mesh.vertices(True):
+        attr: dict
+        for _, attr in self.mesh.vertices(True):  # type: ignore
             attr["x"] += vector[0]
             attr["y"] += vector[1]
             attr["z"] += vector[2]
@@ -363,7 +364,7 @@ class RUIMeshObject(RhinoMeshObject):
 
         color = Rhino.ApplicationSettings.AppearanceSettings.FeedbackColor
         nbrs = [self.mesh.vertex_coordinates(nbr) for nbr in self.mesh.vertex_neighbors(vertex)]
-        nbrs = [Rhino.Geometry.Point3d(*xyz) for xyz in nbrs]
+        nbrs = [Rhino.Geometry.Point3d(*xyz) for xyz in nbrs]  # type: ignore
 
         gp = Rhino.Input.Custom.GetPoint()
 
@@ -400,7 +401,7 @@ class RUIMeshObject(RhinoMeshObject):
             nbrs = self.mesh.vertex_neighbors(vertex)
             for nbr in nbrs:
                 b = self.mesh.vertex_coordinates(nbr)
-                line = [Rhino.Geometry.Point3d(*a), Rhino.Geometry.Point3d(*b)]
+                line = [Rhino.Geometry.Point3d(*a), Rhino.Geometry.Point3d(*b)]  # type: ignore
                 if nbr in vertices:
                     lines.append(line)
                 else:
@@ -427,7 +428,7 @@ class RUIMeshObject(RhinoMeshObject):
         vector = compas_rhino.conversions.vector_to_compas(end - start)
 
         for vertex in vertices:
-            point = Point(*self.mesh.vertex_attributes(vertex, "xyz"))
+            point = Point(*self.mesh.vertex_attributes(vertex, "xyz"))  # type: ignore
             self.mesh.vertex_attributes(vertex, "xyz", point + vector)
         return True
 
@@ -450,10 +451,10 @@ class RUIMeshObject(RhinoMeshObject):
         connectors = []
 
         for vertex in vertices:
-            a = Rhino.Geometry.Point3d(*self.mesh.vertex_coordinates(vertex))
+            a = Rhino.Geometry.Point3d(*self.mesh.vertex_coordinates(vertex))  # type: ignore
             nbrs = self.mesh.vertex_neighbors(vertex)
             for nbr in nbrs:
-                b = Rhino.Geometry.Point3d(*self.mesh.vertex_coordinates(nbr))
+                b = Rhino.Geometry.Point3d(*self.mesh.vertex_coordinates(nbr))  # type: ignore
                 if nbr in vertices:
                     lines.append((a, b))
                 else:
@@ -487,9 +488,9 @@ class RUIMeshObject(RhinoMeshObject):
         gp.DynamicDraw += OnDynamicDraw
 
         if direction in ("x", "y", "z"):
-            gp.Constrain(geometry)
+            gp.Constrain(geometry)  # type: ignore
         else:
-            gp.Constrain(geometry, False)
+            gp.Constrain(geometry, False)  # type: ignore
 
         gp.Get()
 

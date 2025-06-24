@@ -1,4 +1,5 @@
 import base64
+import errno
 import json
 import os
 import uuid
@@ -180,7 +181,7 @@ class Rui(object):
             try:
                 os.makedirs(os.path.dirname(self.filepath))
             except OSError as e:
-                if e.errno != os.errno.EEXIST:
+                if e.errno != errno.EEXIST:
                     raise e
         if not os.path.exists(self.filepath):
             with open(self.filepath, "w+"):
@@ -201,7 +202,7 @@ class Rui(object):
         raise NotImplementedError
 
     def write(self):
-        root = ET.tostring(self.root)
+        root = ET.tostring(self.root)  # type: ignore
         xml = minidom.parseString(root).toprettyxml(indent="  ")
         xml = "\n".join([line for line in xml.split("\n") if line.strip()])
         with open(self.filepath, "w+") as fh:

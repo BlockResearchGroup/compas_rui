@@ -1,3 +1,5 @@
+from typing import Optional
+
 import Eto.Forms  # type: ignore
 import Rhino.UI  # type: ignore
 import System  # type: ignore
@@ -6,17 +8,16 @@ import System  # type: ignore
 class AboutForm:
     def __init__(
         self,
-        title,  # type: str
-        description,  # type: str
-        version,  # type: str
-        website,  # type: str
-        copyright,  # type: str
-        license,  # type: str
-        designers=None,  # type: list[str] | None
-        developers=None,  # type: list[str] | None
-        documenters=None,  # type: list[str] | None
-    ):
-        # type: (...) -> None
+        title: str,
+        description: str,
+        version: str,
+        website: str,
+        copyright: str,
+        license: str,
+        designers: Optional[list[str]] = None,
+        developers: Optional[list[str]] = None,
+        documenters: Optional[list[str]] = None,
+    ) -> None:
         designers = designers or []
         developers = developers or []
         documenters = documenters or []

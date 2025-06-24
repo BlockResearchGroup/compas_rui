@@ -47,7 +47,7 @@ class CustomCell(Eto.Forms.CustomCell):
                 control = Eto.Forms.NumericUpDown()
                 control.Value = value
                 d = decimal.Decimal(str(value)).as_tuple()
-                control.DecimalPlaces = -d.exponent
+                control.DecimalPlaces = -d.exponent  # type: ignore
                 control.MaximumDecimalPlaces = 3
                 control.MinValue = 0
                 control.Increment = 1e-3
@@ -172,7 +172,7 @@ class SettingsForm(Eto.Forms.Dialog[bool]):
                     item = Eto.Forms.TreeGridItem()
                     item.Values = (key, None, None)
                     add_items(item.Children, value)
-                parent.Add(item)
+                parent.Add(item)  # type: ignore
 
         treecollection = Eto.Forms.TreeGridItemCollection()
         add_items(treecollection, settings.grouped_items)
