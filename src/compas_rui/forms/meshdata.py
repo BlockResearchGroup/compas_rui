@@ -5,6 +5,8 @@ import Eto.Forms  # type: ignore
 import Rhino  # type: ignore
 import Rhino.UI  # type: ignore
 
+from compas.datastructures import Mesh
+
 
 class MeshDataForm(Eto.Forms.Dialog[bool]):
     """Form for working with mesh data.
@@ -30,7 +32,7 @@ class MeshDataForm(Eto.Forms.Dialog[bool]):
 
     def __init__(
         self,
-        mesh,
+        mesh: Mesh,
         title="Mesh Data",
         width=800,
         height=800,
