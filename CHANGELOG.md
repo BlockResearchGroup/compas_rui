@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+* Added `compas_rui.feedback` for providing feedback to the user through dialogs.
+
 ### Changed
 
 ### Removed
