@@ -88,7 +88,7 @@ class RUIMeshObject(RhinoMeshObject):
         vertices = [self._guid_vertex[guid] for guid in guids if guid in self._guid_vertex] if guids else []
         return vertices
 
-    def select_edges(self, message="Select Edges") -> Optional[tuple[int, int]]:
+    def select_edges(self, message="Select Edges") -> Optional[list[tuple[int, int]]]:
         options = ["All", "Boundary", "EdgeLoop", "EdgeStrip", "Manual"]
         option = rs.GetString(message=message, strings=options)
 
